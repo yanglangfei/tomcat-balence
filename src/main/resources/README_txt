@@ -1,0 +1,13 @@
+1、下载 tomcat  并解压两份  修改 server.xml 端口
+
+https://tomcat.apache.org/download-90.cgi
+
+2、创建应用  集成 spring-boot-starter-thymeleaf
+
+3、打成war包、注意修改 POM文件 和 application类
+
+4、更新 tomcat server.xml 中的 Engine 节点 实现 负载实例监听  配置 Context 节点虚拟主机  配置  context.xml 中的  session 共享
+   依次启动  redis  tomcat-1  tomcat-2   测试 tomcat 是否访问成功
+
+5、配置 nginx 负载均衡  并启动  nginx
+   upstream  配置 两个  tomcat server   配置  proxy_pass 关联负载组
