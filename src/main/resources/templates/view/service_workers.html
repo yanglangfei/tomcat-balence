@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SERVICE-WORKER</title>
+</head>
+<body>
+<h3>一些提示信息</h3>
+<ul>
+    <li>浏览器是否支持：<span id="isSupport"></span></li>
+    <li>service worker是否注册成功：<span id="isSuccess"></span></li>
+    <li>当前注册状态：<span id="state"></span></li>
+    <li>当前service worker状态：<span id="swState"></span></li>
+</ul>
+<script src="../../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script src="../../static/js/message.js" th:src="@{/js/message.js}"></script>
+<script>
+
+    //判断是否支持  serviceWorker
+    if ('serviceWorker' in navigator) {
+        $('#isSupport').text('支持');
+
+        // 开始注册service workers  注册 离线缓存  sw-cache.js
+        navigator.serviceWorker.register('/js/sw-cache.js', {
+            scope: './js/'
+        }).then(function (registration) {
+            $('#isSuccess').text('注册成功');
+
+            var serviceWorker;
+            if (registration.installing) {
+                serviceWorker = registration.installing;
+                $('#state').text('installing');
+            } else if (registration.waiting) {
+                serviceWorker = registration.waiting;
+                $('#state').text('waiting');
+            } else if (registration.active) {
+                serviceWorker = registration.active;
+                $('#state').text('active');
+            }
+            if (serviceWorker) {
+                $('#swState').text(serviceWorker.state);
+                serviceWorker.addEventListener('statechange', function (e) {
+                    $('#swState').append('&emsp;状态变化为' + e.target.state);
+                });
+            }
+        }).catch (function (error) {
+            $('#isSuccess').text('注册没有成功');
+        });
+    } else {
+        $('#isSupport').text('不支持');
+    }
+</script>
+
+</body>
+</html>
