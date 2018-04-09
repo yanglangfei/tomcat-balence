@@ -33,10 +33,27 @@ self.addEventListener('activate', function(event) {
 });
 
 //页面和ServiceWorker质检可以通过postMessage方法发送消息，发送的消息可以通过message事件接收到  可以实现消息推送
-self.addEventListener("message",function (event) {
-    console.log(event);
-
-
+self.addEventListener('push', function(event) {
+    alert("push message");
+    var title = 'Yay a message.';
+    var body = 'We have received a push message.';
+    var icon = '/images/icon-192x192.png';
+    var tag = 'simple-push-demo-notification-tag';
+    var data = {
+        doge: {
+            wow: 'such amaze notification data'
+        }
+    };
+    //该方法是用来延迟 SW 的结束。因为，SW 可能在任何时间结束，为了防止这样的情况，需要使用 waitUntil 监听 promise，使系统不会在 promise 执行时就结束 SW
+    event.waitUntil(
+        //该方法执行后，会发回一个 promise 对象。
+        self.registration.showNotification(title, {
+            body: body,
+            icon: icon,
+            tag: tag,
+            data: data
+        })
+    );
 });
 
 

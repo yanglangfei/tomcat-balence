@@ -46,9 +46,31 @@
         }).catch (function (error) {
             $('#isSuccess').text('注册没有成功');
         });
+
+
+        debugger;
+        if ("PushManager" in window) {
+            navigator.serviceWorker.ready.then(function(swReg) {
+                console.log("PushManager registration success");
+                //swRegistration = swReg;
+                //initPush();
+            }).catch(function(err) {
+                console.log(err.message);
+            });
+        }else {
+            console.log("not  support pm")
+        }
+
+
+
+
+
+
+
     } else {
         $('#isSupport').text('不支持');
     }
+
 </script>
 
 </body>
