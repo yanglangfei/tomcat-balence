@@ -83,5 +83,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.18" level="project" />
   </component>
 </module>
