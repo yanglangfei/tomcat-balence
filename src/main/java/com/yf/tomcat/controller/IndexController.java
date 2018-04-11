@@ -23,6 +23,7 @@ public class IndexController {
         response.addCookie(cookie);
         ModelAndView modelAndView=new ModelAndView("index");
         modelAndView.addObject("user","alias");
+        response.addHeader("cache-control", "max-age=7200");
         return modelAndView;
     }
 

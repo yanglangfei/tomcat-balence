@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * PWA 技术的研究中发现 PWA 其中有三个关键的技术
  * Service Worker
@@ -26,7 +28,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ServiceWorkersController {
 
     @GetMapping("/toServiceWorkers")
-    public  String toServiceWorkers(Model model){
+    public  String toServiceWorkers(Model model, HttpServletResponse response){
+        response.addHeader("cache-control", "max-age=7200");
         return "/view/service_workers";
     }
 
